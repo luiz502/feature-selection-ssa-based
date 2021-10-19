@@ -4,9 +4,7 @@ import opfython.stream.loader as l
 import opfython.stream.parser as p
 from opfython.models.supervised import SupervisedOPF
 import sklearn.datasets as sd
-#from ssa import SSA
-from opytimizer.optimizers.swarm.pso import PSO
-from opytimizer.optimizers.evolutionary.ga import GA
+from ssa import SSA
 
 import statistics as st
 import opytimizer.math.random as r
@@ -95,7 +93,7 @@ space = SearchSpace(n_agents, n_variables, lower_bound, upper_bound)
 
 function = Function(supervised_opf_feature_selection)
 
-optimizer = PSO()
+optimizer = SSA()
 
 # Bundles every piece into Opytimizer class
 opt = Opytimizer(space, optimizer, function)
