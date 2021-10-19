@@ -2,8 +2,10 @@ import opytimizer.math.random as r
 import math as m
 import numpy as np
 
+#Sigmoid function and it's variations for feature selection
+
 def s1_transfer_function(otimization_solution):
-    """Transfer Function S1
+    """ S1 Transfer Function: The original Sigmoid fuction
 
     Args:
         otimization_solution (np.array): The best agent's position. 
@@ -11,76 +13,141 @@ def s1_transfer_function(otimization_solution):
 
     features = []
 
-    countSelectedFeatures = 0
+    for i in range(otimization_solution.size):
+        rand = r.generate_uniform_random_number()
+        if rand < 1.0 / (1.0 + m.exp(-1 * otimization_solution[i])):
+            features.append(1)
+        else:
+            features.append(0)
+
+    return np.asarray(features).astype(bool)
+
+def s2_transfer_function(otimization_solution):
+    """ S2 Transfer Function 
+
+    Args:
+        otimization_solution (np.array): The best agent's position. 
+    """
+
+    features = []
 
     for i in range(otimization_solution.size):
         rand = r.generate_uniform_random_number()
         if rand < (1.0 / (1.0 + m.exp(-2 * otimization_solution[i]))):
             #If the feature is selected
             features.append(1)
-            countSelectedFeatures += 1
         else:
             features.append(0)
 
-    return features
-        
-def s2_transfer_function(otimization_solution):
-    """ Transfer Function S2: The original Sigmoid fuction
+    return np.asarray(features).astype(bool)
+
+def s3_transfer_function(otimization_solution):
+    """ S3 Transfer Function 
 
     Args:
-        otimization_solution (Agent): The optimization's best agent.
+        otimization_solution (np.array): The best agent's position. 
     """
 
     features = []
 
-    numChosenFeatures = 0
-
     for i in range(otimization_solution.size):
         rand = r.generate_uniform_random_number()
-        if rand < 1.0 / (1.0 + m.exp(-1 * otimization_solution[i])):
+        if rand < 1.0 / (1.0 + m.exp(-1 * otimization_solution[i] / 2)):
             features.append(1)
-            numChosenFeatures += 1
         else:
             features.append(0)
 
-    return features
-
-def s3_transfer_function(otimization_solution):
-    """ Transfer Function S2: The original Sigmoid fuction
-
-    Args:
-        otimization_solution (Agent): The optimization's best agent.
-    """
-
-    numChosenFeatures = 0
-
-    for i in (otimization_solution.size()):
-        rand = r.generate_uniform_random_number()
-        if r < 1.0 / (1.0 + m.exp(-1 * otimization_solution.position[i] / 2)):
-            otimization_solution.position[i] = 1
-            numChoosenFeatures += 1
-        else:
-            otimization_solution.position[0]
-
-    #return
+    return np.asarray(features).astype(bool)
 
 def s4_transfer_function(otimization_solution):
-    """ Transfer Function S2: The original Sigmoid fuction
+    """ S4 Transfer Function 
 
     Args:
-        otimization_solution (Agent): The optimization's best agent.
+        otimization_solution (np.array): The best agent's position. 
     """
 
-    numChosenFeatures = 0
+    features = []
 
-    for i in (otimization_solution.size()):
+    for i in range(otimization_solution.size):
         rand = r.generate_uniform_random_number()
-        if r < 1.0 / (1.0 + m.exp(-1 * otimization_solution.position[i] / 3)):
-            otimization_solution.position[i] = 1
-            numChoosenFeatures += 1
+        if rand < 1.0 / (1.0 + m.exp(-1 * otimization_solution[i] / 3)):
+            features.append(1)
         else:
-            otimization_solution.position[0]
+            features.append(0)
 
-    #return
+    return np.asarray(features).astype(bool)
 
-np.random
+def v1_transfer_function(otimization_solution):
+    """ V1 Transfer Function
+
+    Args:
+        otimization_solution (np.array): The best agent's position. 
+    """
+    
+    features = []
+
+    for i in range(otimization_solution.size):
+        rand = r.generate_uniform_random_number()
+        if rand < m.fabs(m.erf(m.sqrt(m.pi)) / 2 * (-1 * otimization_solution[i])):
+            features.append(1)
+        else:
+            features.append(0)
+
+    return np.asarray(features).astype(bool)
+
+def v2_transfer_function(otimization_solution):
+    """ V2 Transfer Function
+
+    Args:
+        otimization_solution (np.array): The best agent's position. 
+    """
+
+    features = []
+
+    for i in range(otimization_solution.size):
+        rand = r.generate_uniform_random_number()
+        if rand < m.fabs(m.tanh(-1 * otimization_solution[i])):
+            features.append(1)
+        else:
+            features.append(0)
+
+    
+    return np.asarray(features).astype(bool)
+
+def v3_transfer_function(otimization_solution):
+    """ V3 Transfer Function
+
+    Args:
+        otimization_solution (np.array): The best agent's position. 
+    """
+
+    features = []
+
+    for i in range(otimization_solution.size):
+        rand = r.generate_uniform_random_number()
+        if rand < m.fabs(-1 * otimization_solution[i] / m.sqrt(1 + (-1 * (otimization_solution[i] * otimization_solution[i])))):
+            features.append(1)
+        else:
+            features.append(0)
+
+    
+    return np.asarray(features).astype(bool)
+
+def v4_transfer_function(otimization_solution):
+    """ V4 Transfer Function
+
+    Args:
+        otimization_solution (np.array): The best agent's position. 
+    """
+
+    features = []
+
+    for i in range(otimization_solution.size):
+        rand = r.generate_uniform_random_number()
+        if rand < m.fabs(2 / m.pi * m.atan(m.pi / 2 * (-1 * otimization_solution[i]))):
+            features.append(1)
+        else:
+            features.append(0)
+
+
+    return np.asarray(features).astype(bool)
