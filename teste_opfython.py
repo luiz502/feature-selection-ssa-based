@@ -32,7 +32,6 @@ def supervised_opf_feature_selection(opytimizer):
     opf = SupervisedOPF(distance='log_squared_euclidean',
                         pre_computed_distance=None)
 
-
     # Fits training data into the classifier
     opf.fit(X_train_selected, Y_train)
 
