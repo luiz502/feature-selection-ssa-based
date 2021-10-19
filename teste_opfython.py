@@ -17,18 +17,11 @@ from opytimizer.optimizers.boolean import BPSO
 from opytimizer.spaces import SearchSpace
 import featureselection as fs
 import numpy as np
-'''
-vehicle = l.load_txt('data/vehicle.txt')
 
-X, Y = p.parse_loader(vehicle)
-
-print(X)
-print(Y)
 
 # Splits data into training and testing sets
 X_train, X_val, Y_train, Y_val = s.split(
     X, Y, percentage=0.5, random_state=1)
-'''
 
 # Loads digits dataset
 #digits = load_digits()
@@ -46,7 +39,7 @@ Y += 1
 # Splits data into training and test sets
 X_train, X_test, Y_train, Y_test = sp.split(X, Y, percentage=0.5, random_state=1)
 
-#Splits data into training and test sets
+# Training set will be splited into training and validation sets
 X_train, X_val, Y_train, Y_val = sp.split(X_train, Y_train, percentage = 0.2, random_state=1)
 
 acuracias = []
