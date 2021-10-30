@@ -3,6 +3,7 @@ import math as m
 import numpy as np
 
 #Sigmoid function and it's variations for feature selection
+#Testando commit
 
 def s1_transfer_function(otimization_solution):
     """ S1 Transfer Function: The original Sigmoid fuction
